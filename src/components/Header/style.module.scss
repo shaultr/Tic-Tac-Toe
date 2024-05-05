@@ -1,0 +1,16 @@
+.container{
+    background-color: #FCD015;
+    width: 500px;
+    height: 100px;
+    
+}
+.borderTop{
+background-color: #B28100;
+border-bottom: 7px solid transparent ; /* גובה של הקו האלכסוני */
+border-left: 500px solid white; /* רוחב של הקו האלכסוני וצבע */
+}
+.borderBottom{
+background-color: #B28100;
+border-top: 7px solid transparent ; /* גובה של הקו האלכסוני */
+border-right: 500px solid white; /* רוחב של הקו האלכסוני וצבע */
+}
