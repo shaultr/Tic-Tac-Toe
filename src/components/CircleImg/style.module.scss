@@ -10,12 +10,11 @@
     align-items: center;
     justify-content: center;
     background-color: #000000;
-    width: 100px;
+    width: 120px;
     height: 40px;
     border-radius: 8px;
     color: white;
-    transform: translateX(-20%);
-    transform: translatey(-30%);
+    transform: translateX(-10%) translateY(-40%);
 }
 .char{
     transform: translateX(-40%);

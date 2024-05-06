@@ -4,11 +4,11 @@ export default function CircleImg() {
     return (
         <>
         <div className={styles.container}>
-            <img src='avatar.svg' width="100px" />
+            <img src='avatar.svg' width="100%" />
         </div>
         <div className={styles.win}>
             <div className={styles.char}>
-            <img src='o.svg' width="40px" />
+            <img src='x.svg' width="40px" />
             </div>
             Wine: 13
         </div>

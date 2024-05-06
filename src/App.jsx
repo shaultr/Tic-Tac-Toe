@@ -1,14 +1,11 @@
-import { useState } from 'react'
-import './App.css'
-import Header from './components/Header'
-import CircleImg from './components/CircleImg'
+import GamePage from './pages/GamePage'
 
 function App() {
 
   return (
     <>
-     <Header />
-     <CircleImg />
+      <GamePage />
+    
     </>
   )
 }
