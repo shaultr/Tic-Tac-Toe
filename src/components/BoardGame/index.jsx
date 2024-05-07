@@ -1,16 +1,15 @@
 import styles from './style.module.scss'
 import Square from '../Square';
-import {
-    useState
-} from 'react';
+import { useState } from 'react';
 
-export default function BoardGame() {
-    const [player, setPlayer] = useState('x');
+export default function BoardGame({player, setPlayer}) {
     const [winner, setWinner] = useState('');
     const [endGame, setEndGame] = useState(false);
+    const [locations, setLocations] = useState([]);
     let counter = 0;
     const [board, setBoard] = useState(Array(9).fill(''));
-
+    let color = !winner ? "rgba(201, 249, 252, 1)" : "rgba(209, 209, 209, 1)";
+    
     const checkWin = (newBoard) => {
         // const row = 3;
         // const column = 3;
@@ -33,12 +32,13 @@ export default function BoardGame() {
                 setWinner(player)
                 setEndGame(true)
                 console.log(player);
+              setLocations([a, b, c]);
             }
         }
 
     }
     const handleClick = (index) => {
-        if (board[index] === ''&&endGame===false) {
+        if (board[index] === '' && endGame === false) {
             const newBoard = [...board];
             newBoard[index] = player;
             setBoard(newBoard)
@@ -53,7 +53,7 @@ export default function BoardGame() {
         <div className={styles.container}>
             {
                 board.map((item, index) => {
-                    return <Square key={index} index={index} click={handleClick} board={board} />
+                    return <Square key={index} index={index} click={handleClick} board={board} winner={winner} locations={locations}/>
                 })
             }
         </div>
