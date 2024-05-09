@@ -14,10 +14,9 @@ app.get('/test', (req, res) => res.send("yesssss"))
 io.on('connection', (socket) => {
 
     socket.on('create-room', () => {
-        // const roomNum = '1234'
-        // socket.join(roomNum)
-        // socket.emit('room-status', { roomNum })
-        console.log("hhhhhh");
+        const roomNum = '1234'
+        socket.join(roomNum)
+        socket.emit('room-status', { roomNum })
     })
     socket.on('join-room', (roomNum) => {
         socket.join(roomNum)
