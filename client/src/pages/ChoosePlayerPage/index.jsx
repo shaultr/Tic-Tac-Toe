@@ -3,10 +3,9 @@ import { NavLink } from 'react-router-dom';
 import ChoosePlayerBox from '../../components/ChoosePlayerBox'
 import Button from '../../components/Button'
 import { useState } from 'react';
-import useSocket from "../../socket";
+import { socket } from "../../socket";
 
 export default function GamePage() {
-  const socket = useSocket()
 
   const [chooseX, setChooseX] = useState('x')
   const [chooseO, setChooseO] = useState('o')
@@ -14,12 +13,12 @@ export default function GamePage() {
   const handleClickX = () => {
     setChooseX('chooseX')
     setChooseO('!chooseO')
-    // socket.on('room-status',(choose)=>console.log(choose))
-    // socket.emit('room',e.target.roomId.value)
+    socket.emit('player-choice','x')
   }
   const handleClickO = () => {
     setChooseO('chooseO')
     setChooseX('!chooseX')
+    socket.emit('player-choice','o')
   }
 
   return (
