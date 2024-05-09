@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import CircleImg from '../../components/CircleImg'
 import Button from '../../components/Button'
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 export default function GamePage() {
   const [player, setPlayer] = useState('x');
@@ -12,10 +13,10 @@ export default function GamePage() {
       <div className={styles.header}>
         <div className={styles.avatar}>
           <div className={styles.plater1}>
-            <CircleImg player={player} choosePlayer={'x'}/>
+            <CircleImg player={player} choosePlayer={'x'} />
           </div>
           <div className={styles.plater1}>
-            <CircleImg  player={player} choosePlayer={'o'}/>
+            <CircleImg player={player} choosePlayer={'o'} />
           </div>
         </div>
         <Header />
@@ -24,7 +25,9 @@ export default function GamePage() {
         <BoardGame player={player} setPlayer={setPlayer} />
       </div>
       <div className={styles.buttons}>
-        <Button text={"back"}/>
+        <NavLink to={'/'}>
+          <Button text={"back"} />
+        </NavLink>
       </div>
     </div>
   )

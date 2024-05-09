@@ -53,7 +53,19 @@ export default function BoardGame({player, setPlayer}) {
         <div className={styles.container}>
             {
                 board.map((item, index) => {
-                    return <Square key={index} index={index} click={handleClick} board={board} winner={winner} locations={locations}/>
+                    let mode = 'emty';
+                    if(board[index] === 'x')mode = 'x'
+                    if(board[index] === 'o')mode = 'o'
+                    if(winner)mode = 'endGame'
+                    if(board[index] === 'x' && winner === 'x' && locations.includes(index))mode = 'x'
+                    if(board[index] === 'x' && winner === 'x' && !locations.includes(index))mode = 'endGameX'
+                    if(board[index] === 'o' && winner === 'x' && !locations.includes(index))mode = 'endGameO'
+                    
+                    if(board[index] === 'o' && winner === 'o' && locations.includes(index))mode = 'o'
+                    if(board[index] === 'o' && winner === 'o' && !locations.includes(index))mode = 'endGameO'
+                    if(board[index] === 'x' && winner === 'o' && !locations.includes(index))mode = 'endGameX'
+
+                    return <Square key={index} index={index} mode={mode} click={handleClick} />
                 })
             }
         </div>
