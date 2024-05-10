@@ -19,8 +19,9 @@ io.on('connection', (socket) => {
         socket.emit('room-status', { roomNum })
     })
     socket.on('join-room', (roomNum) => {
-        socket.join(roomNum)
-        socket.emit('room-status')
+        // socket.join(roomNum)
+        // socket.emit('room-status')
+        console.log(roomNum);
     })
     socket.on('player-choice', (choice) => {
         console.log(`Player choice: ${choice}`);

@@ -1,21 +1,33 @@
 import styles from './style.module.css'
 import ContentFrame from '../../components/ContentFrame';
-
+import BackButton from '../../components/BackButton';
+import { socket } from "../../socket";
 import Button from '../../components/Button'
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export default function JoineToAGame() {
+const [code, setCode] = useState(0);
+const [roomNun, setRoomNun] = useState(0);
 
-  function getMyDiv() {
-    const myDiv = <input placeholder="fff" style={{ border: "none" }} />;
+  function getContent() {
+    const myDiv = <input onChange={(e)=>setCode(e.target.value)} placeholder="enter code game" style={{ border: "none" }} />;
     return myDiv;
   }
-  const content = getMyDiv();
+  const content = getContent();
 
+  const join = () => {
+    socket.emit('join-room',roomNun)
+    console.log(code);
+  }
+  const createGame = () => {
+    socket.emit('create-room')
+  }
   return (
     <div className={styles.container}>
-      {/* <Back /> */}
+    <div className={styles.back}>
+      <BackButton />
+    </div>
       <div className={styles.title}>
         <h1>Join To A Game</h1>
       </div>
@@ -23,7 +35,7 @@ export default function JoineToAGame() {
         <ContentFrame content={content} />
       </div>
       <div className={styles.buttons}>
-        <NavLink to={'/coose'}>
+        <NavLink to={'/choosePlayer'} onClick={join}>
           <Button text={"join"} />
         </NavLink>
       </div>
@@ -36,7 +48,7 @@ export default function JoineToAGame() {
         </div>
 
       <div className={styles.buttons}>
-        <NavLink to={'/choose'}>
+        <NavLink to={'/choose'} onClick={createGame}>
           <Button text={"create a game"} />
         </NavLink>
       </div>

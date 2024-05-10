@@ -8,7 +8,6 @@ export default function BoardGame({chooseX, chooseO, handleClickX, handleClickO}
         <div className={styles.container}>
             <Square click={handleClickX} mode={chooseX} />
             <Square click={handleClickO} mode={chooseO} />
-
         </div>
     )
 }

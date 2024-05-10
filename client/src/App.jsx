@@ -14,13 +14,13 @@ function App() {
 
   return (
     <>
-      <SocketProvider>
+      {/* <SocketProvider> */}
         <Routes>
           <Route path="/" element={<JoineToAGame />} />
           <Route path="/choosePlayer" element={<ChoosePlayerPage />} />
           <Route path="play" element={<GamePage />} />
         </Routes>
-      </SocketProvider>
+      {/* </SocketProvider> */}
     </>
   )
 }
