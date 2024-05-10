@@ -20,7 +20,7 @@ export default function createAGame() {
     setCode(code);
   }, []);
 
-  const content = <h1>{code}</h1>;
+  const content = <h1 className={styles.code}>{code}</h1>;
 
   return (
     <div className={styles.container}>
@@ -31,7 +31,7 @@ export default function createAGame() {
       <h3 className={styles.title}>your code </h3>
         <ContentFrame content={content} />
 
-        <div className={styles.circle}>
+        <div className={styles.circleContainer}>
         <div className={styles.circle}>
         </div>
         <div className={styles.circle}>
