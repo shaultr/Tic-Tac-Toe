@@ -16,8 +16,8 @@ export default function createAGame() {
     return randomNumber;
   }
   useEffect(() => {
-    const code = getRandomNumber()
-    setCode(code);
+    socket.emit('create-room');
+    socket.on('room-status',room=>setCode(room?.roomNumCreated));
   }, []);
 
   const content = <h1 className={styles.code}>{code}</h1>;
@@ -27,33 +27,35 @@ export default function createAGame() {
       <div className={styles.back}>
         <BackButton />
       </div>
-      <div className={styles.boardBox}>
-      <h3 className={styles.title}>your code </h3>
+        <h3 className={styles.title}>your code </h3>
         <ContentFrame content={content} />
 
         <div className={styles.circleContainer}>
-        <div className={styles.circle}>
-        </div>
-        <div className={styles.circle}>
-        </div>
-        <div className={styles.circle}>
-        </div>
-        <div className={styles.circle}>
-        </div>
-        <div className={styles.circle}>
-        </div>
-        <div className={styles.circle}>
-        </div>
-        <div className={styles.circle}>
-        </div>
+          <div className={styles.circle}>
+
+          </div>
+          <div className={styles.circle}>
+
+          </div>
+          <div className={styles.circle}>
+
+          </div>
+          <div className={styles.circle}>
+
+          </div>
+          <div className={styles.circle}>
+
+          </div>
+          <div className={styles.circle}>
+
+          </div>
+          <div className={styles.circle}>
+
+          </div>
         </div>
 
-        <div className={styles.title}>
-          <h1>waiting for opponnent </h1>
-        </div>
-      </div>
-  
-
+          <h1 className={styles.title}>waiting for opponnent </h1>
+      
     </div>
   )
 }

@@ -10,22 +10,33 @@ const server = createServer(app)
 const io = new Server(server, { cors: { origin: '*', methods: '*' } })
 
 app.get('/test', (req, res) => res.send("yesssss"))
+function getRandomNumber() {
+    let randomNumber = Math.random();
+    randomNumber *= 100000000;
+    randomNumber = Math.floor(randomNumber);
+    return randomNumber;
+  }
 
 io.on('connection', (socket) => {
 
     socket.on('create-room', () => {
-        const roomNum = '1234'
-        socket.join(roomNum)
-        socket.emit('room-status', { roomNum })
+        const roomNumCreated = getRandomNumber()
+        socket.join(roomNumCreated)
+        socket.emit('room-status', { roomNumCreated })
     })
     socket.on('join-room', (roomNum) => {
+        if(roomNum !==roomNumCreated) {
+            return;
+        }
         socket.join(roomNum)
-        socket.emit('room-status')
-        console.log(roomNum); 
+        // socket.emit('room-status')
+        console.log(roomNum);
+        
     })
+
     socket.on('player-choice', (choice) => {
         console.log(`Player choice: ${choice}`);
-        socket.emit(choice)
+        socket.emit("choose", choice)
     });
     console.log("connected", socket.id);
 })
