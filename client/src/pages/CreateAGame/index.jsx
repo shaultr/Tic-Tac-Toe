@@ -27,8 +27,11 @@ export default function createAGame() {
       <div className={styles.back}>
         <BackButton />
       </div>
-        <h3 className={styles.title}>your code </h3>
+      <div className={styles.codeContainer}>
+
+        <h3 >your code </h3>
         <ContentFrame content={content} />
+      </div>
 
         <div className={styles.circleContainer}>
           <div className={styles.circle}>
@@ -52,9 +55,18 @@ export default function createAGame() {
           <div className={styles.circle}>
 
           </div>
-        </div>
+          <div className={styles.circle}>
 
+          </div>
+          <div className={styles.circle}>
+
+          </div>
+          <div className={styles.circle}>
+
+          </div>
+        </div>
           <h1 className={styles.title}>waiting for opponnent </h1>
+
       
     </div>
   )

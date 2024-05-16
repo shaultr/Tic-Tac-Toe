@@ -27,11 +27,26 @@
 }
 .title{
     color: white;
-    display: flex;
+  position: relative;
+  bottom: 60px;
     font-size: 30px;
     text-shadow: 2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 2px 0px black;
-}
 
+  }
+.codeContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.codeContainer h3{
+  color: white;
+  font-size: 30px;
+  text-shadow: 2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 2px 0px black;
+  position: relative;
+  top: 18px;
+}
 .circleContainer {
     width: 200px;
     height: 200px;
@@ -79,7 +94,21 @@
   }
   .circle:nth-child(6) {
     transform: rotate(180deg) translate(70px) rotate(-180deg);
+    background-color:#fcd2159a;
   }
   .circle:nth-child(7) {
     transform: rotate(210deg) translate(70px) rotate(-210deg);
+    background-color:#fcd21585;
+  }
+  .circle:nth-child(8) {
+    transform: rotate(240deg) translate(70px) rotate(-240deg);
+    background-color:#fcd21562;
+  }
+  .circle:nth-child(9) {
+    transform: rotate(270deg) translate(70px) rotate(-270deg);
+    background-color:#fcd21562;
+  }
+  .circle:nth-child(10) {
+    transform: rotate(300deg) translate(70px) rotate(-300deg);
+    background-color:#fcd21562;
   }
