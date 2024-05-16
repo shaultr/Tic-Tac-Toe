@@ -10,14 +10,16 @@ export default function createAGame() {
   const [code, setCode] = useState(0);
 
   function getRandomNumber() {
-    let randomNumber = Math.random();
-    randomNumber *= 100000000;
-    randomNumber = Math.floor(randomNumber);
+    let randomNumber = Math.floor(Math.random() * 1000000); // מקבל מספר בין 0 ל-999999
+    while (randomNumber < 100000) { // מוודא שהמספר בן 6 ספרות
+      randomNumber = Math.floor(Math.random() * 1000000);
+    }
+
     return randomNumber;
   }
   useEffect(() => {
     socket.emit('create-room');
-    socket.on('room-status',room=>setCode(room?.roomNumCreated));
+    socket.on('room-status', room => setCode(room?.roomNumCreated));
   }, []);
 
   const content = <h1 className={styles.code}>{code}</h1>;
@@ -33,41 +35,41 @@ export default function createAGame() {
         <ContentFrame content={content} />
       </div>
 
-        <div className={styles.circleContainer}>
-          <div className={styles.circle}>
+      <div className={styles.circleContainer}>
+        <div className={styles.circle}>
 
-          </div>
-          <div className={styles.circle}>
-
-          </div>
-          <div className={styles.circle}>
-
-          </div>
-          <div className={styles.circle}>
-
-          </div>
-          <div className={styles.circle}>
-
-          </div>
-          <div className={styles.circle}>
-
-          </div>
-          <div className={styles.circle}>
-
-          </div>
-          <div className={styles.circle}>
-
-          </div>
-          <div className={styles.circle}>
-
-          </div>
-          <div className={styles.circle}>
-
-          </div>
         </div>
-          <h1 className={styles.title}>waiting for opponnent </h1>
+        <div className={styles.circle}>
 
-      
+        </div>
+        <div className={styles.circle}>
+
+        </div>
+        <div className={styles.circle}>
+
+        </div>
+        <div className={styles.circle}>
+
+        </div>
+        <div className={styles.circle}>
+
+        </div>
+        <div className={styles.circle}>
+
+        </div>
+        <div className={styles.circle}>
+
+        </div>
+        <div className={styles.circle}>
+
+        </div>
+        <div className={styles.circle}>
+
+        </div>
+      </div>
+      <h1 className={styles.title}>waiting for opponnent </h1>
+
+
     </div>
   )
 }

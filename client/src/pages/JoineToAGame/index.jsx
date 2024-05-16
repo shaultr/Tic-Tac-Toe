@@ -18,8 +18,9 @@ export default function JoineToAGame() {
 
   const join = () => {
     socket.emit('join-room', code);
-    socket.on('room-status', room=>setCode(room?.roomNum));
-    code && navigate('/choosePlayer');
+    socket.on('room-status', room=>room.roomNum && console.log(room.roomNum));
+    // console.log(code);
+    // code && navigate('/choosePlayer');
   }
 
   return (

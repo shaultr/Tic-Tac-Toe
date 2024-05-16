@@ -7,23 +7,12 @@ const express = require('express'),
 app.use(cors())
 
 const server = createServer(app)
-const io = new Server(server, { cors: { origin: '*', methods: '*' } })
+const io = new Server(server, { cors: { origin: '*', methods: '*' } });
+
 const rooms ={
-    // roomNum:{
-    //     p1:{
-    //         id: '87383',
-    //         sym: 'x',
-    //         name: 'moshe'
-    //     },
-    //     p2:{
-    //         id: '87383',
 
-    //     },
-    //     board: [],
-
-
-    // }
 }
+console.log(rooms);
 app.get('/test', (req, res) => res.send("yesssss"))
 function getRandomNumber() {
     let randomNumber = Math.random();
@@ -42,11 +31,14 @@ io.on('connection', (socket) => {
 
             }
         }
+        // console.log(rooms[roomNumCreated]);
         socket.join(roomNumCreated)
         socket.emit('room-status', { roomNumCreated })
     })
+    
     socket.on('join-room', (roomNum) => {
-        if(!rooms.roomNum) {
+        console.log(rooms[roomNum]);
+        if(!rooms[roomNum]) {
             return;
         }
         rooms[roomNum] = {
@@ -56,7 +48,6 @@ io.on('connection', (socket) => {
         }
         socket.join(roomNum)
         socket.emit('room-status', { roomNum })
-        console.log(roomNum);
         
     })
 
