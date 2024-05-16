@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function JoineToAGame() {
-  const [code, setCode] = useState(0);
+  const [code, setCode] = useState(null);
   const [roomNun, setRoomNun] = useState(0);
   const navigate = useNavigate();
   function getContent() {
@@ -18,8 +18,8 @@ export default function JoineToAGame() {
 
   const join = () => {
     socket.emit('join-room', code);
-    // socket.on('room-status');
-    // navigate('/choosePlayer');
+    socket.on('room-status', room=>setCode(room?.roomNum));
+    code && navigate('/choosePlayer');
   }
 
   return (

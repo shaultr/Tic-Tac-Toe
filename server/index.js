@@ -8,7 +8,22 @@ app.use(cors())
 
 const server = createServer(app)
 const io = new Server(server, { cors: { origin: '*', methods: '*' } })
+const rooms ={
+    // roomNum:{
+    //     p1:{
+    //         id: '87383',
+    //         sym: 'x',
+    //         name: 'moshe'
+    //     },
+    //     p2:{
+    //         id: '87383',
 
+    //     },
+    //     board: [],
+
+
+    // }
+}
 app.get('/test', (req, res) => res.send("yesssss"))
 function getRandomNumber() {
     let randomNumber = Math.random();
@@ -21,15 +36,26 @@ io.on('connection', (socket) => {
 
     socket.on('create-room', () => {
         const roomNumCreated = getRandomNumber()
+        rooms[roomNumCreated] = {
+            p1: {
+                id: socket.id,
+
+            }
+        }
         socket.join(roomNumCreated)
         socket.emit('room-status', { roomNumCreated })
     })
     socket.on('join-room', (roomNum) => {
-        if(roomNum !==roomNumCreated) {
+        if(!rooms.roomNum) {
             return;
         }
+        rooms[roomNum] = {
+            p2: {
+                id: socket.id,
+            }
+        }
         socket.join(roomNum)
-        // socket.emit('room-status')
+        socket.emit('room-status', { roomNum })
         console.log(roomNum);
         
     })
