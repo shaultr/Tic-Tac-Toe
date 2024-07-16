@@ -8,17 +8,13 @@ import { useEffect } from "react"
 
 function App() {
 
-  useEffect(() => {
-    socket.emit('create-room');
-    console.log('socket');
-  }, []);
 
   return (
     <>
       <SocketProvider>
         <Routes>
-          <Route path="/" element={<CreateAGame />} />
-          <Route path="/JoineToAGame" element={<JoineToAGame />} />
+          <Route path="/" element={<JoineToAGame />} />
+          <Route path="/CreateAGame" element={<CreateAGame />} />
           <Route path="/choosePlayer" element={<ChoosePlayerPage />} />
           <Route path="play" element={<GamePage />} />
         </Routes>

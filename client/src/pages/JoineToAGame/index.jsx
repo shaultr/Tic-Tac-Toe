@@ -10,17 +10,22 @@ export default function JoineToAGame() {
   const [code, setCode] = useState(null);
   const [roomNun, setRoomNun] = useState(0);
   const navigate = useNavigate();
+  
   function getContent() {
-    const myDiv = <input onChange={(e) => setCode(e.target.value)} placeholder="enter code game" style={{ border: "none" }} />;
-    return myDiv;
+    const myInput = <input onChange={(e) => setCode(e.target.value)} placeholder="enter code game" style={{ border: "none" }} />;
+    return myInput;
   }
   const content = getContent();
 
   const join = () => {
     socket.emit('join-room', code);
-    socket.on('room-status', room=>room.roomNum && console.log(room.roomNum));
-    // console.log(code);
-    // code && navigate('/choosePlayer');
+    socket.on('error', message=> console.log(message));
+    socket.on('room-status', (room) => {
+      if (room.roomNum) {
+        console.log('Joined room:', room.roomNum);
+        navigate('/choosePlayer')
+      }
+    });   
   }
 
   return (
@@ -48,7 +53,7 @@ export default function JoineToAGame() {
       </div>
 
       <div className={styles.buttons}>
-        <NavLink to={'/'}>
+        <NavLink to={'/CreateAGame'}>
           <Button text={"create a game"} />
         </NavLink>
       </div>

@@ -2,7 +2,7 @@ import styles from './style.module.scss';
 
 export default function Square({ mode, index, click }) {
 
-  const thisColor = (mode === "emty" ||  mode === "x" ||  mode === "o" || mode === "winner") ? "rgba(201, 249, 252, 1)":
+  const thisColor = (mode === "empty" ||  mode === "x" ||  mode === "o" || mode === "winner") ? "rgba(201, 249, 252, 1)":
   "rgba(209, 209, 209, 1)"
   return (
     <div>

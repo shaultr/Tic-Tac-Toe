@@ -4,6 +4,7 @@ import ChoosePlayerBox from '../../components/ChoosePlayerBox'
 import Button from '../../components/Button'
 import { useState } from 'react';
 import useSocket from "../../socket";
+import { socket } from "../../socket";
 
 export default function GamePage() {
 const socket = useSocket()
@@ -22,7 +23,10 @@ const socket = useSocket()
     setChooseX('!chooseX')
     socket.emit('player-choice','o')
   }
-
+const startGame = ()=>{
+  console.log("ooooo");
+  socket.emit('startGame')
+}
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -32,7 +36,7 @@ const socket = useSocket()
       <ChoosePlayerBox chooseX={chooseX} chooseO={chooseO} handleClickX={handleClickX} handleClickO={handleClickO} />
       <div className={styles.buttons}>
         {(chooseX == 'chooseX' || chooseO == 'chooseO') &&
-          <NavLink to={'/play'}>
+          <NavLink to ='/play' onClick={startGame}>
             <Button text={"let's play"} />
           </NavLink>
         }

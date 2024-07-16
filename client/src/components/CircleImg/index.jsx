@@ -2,7 +2,7 @@ import styles from './style.module.scss'
 
 export default function CircleImg({ choosePlayer, player }) {
     const myWidth = player == choosePlayer ? "110px" : "100px";
-    const myBorder = player == choosePlayer ?  "4px solid rgba(142, 235, 255, 1)": "4px solid #B28100";
+    const myBorder = player == choosePlayer ? "4px solid rgba(142, 235, 255, 1)" : "4px solid #B28100";
 
     return (
         <>
@@ -11,7 +11,10 @@ export default function CircleImg({ choosePlayer, player }) {
             </div>
             <div className={styles.win}>
                 <div className={styles.char}>
-                    <img src='x.svg' width="40px" />
+                    {choosePlayer === 'x' ?
+                        <img src='x.svg' width="40px" /> :
+                        <img src='o.svg' width="40px" />
+                    }
                 </div>
                 Wins: 13
             </div>
