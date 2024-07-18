@@ -1,4 +1,4 @@
-export const checkWin = (newBoard) => {
+const checkWin = (board, player) => {
 
     const optionsWin = [
         [0, 1, 2],
@@ -12,9 +12,11 @@ export const checkWin = (newBoard) => {
     ]
     for (let i = 0; i < optionsWin.length; i++) {
         const [a, b, c] = optionsWin[i];
-        if (newBoard[a] === player && newBoard[b] === player && newBoard[c] === player) {
-            return true;
+        if (board[a] === player && board[b] === player && board[c] === player) {
+            return { isWin: true, locations: [a, b, c] };
         }
     }
+    return { isWin: false, locations: [] };
+};
 
-}
+module.exports = { checkWin };

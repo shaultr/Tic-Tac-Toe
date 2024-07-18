@@ -1,5 +1,5 @@
 const { log } = require('console');
-
+const { checkWin } = require('./functions')
 const express = require('express'),
     app = express(),
     { createServer } = require('http'),
@@ -15,8 +15,16 @@ const rooms = {
 
 }
 app.get('/test', (req, res) => res.send("yesssss"))
-let randomNumber;
-let currentPlayer = 'x'
+let randomNumber = 0;
+let currentPlayer = ''
+let board = Array(9).fill('');
+
+const resetGame = () => {
+    board = Array(9).fill('');
+    currentPlayer = null;
+    endGame = false;
+    console.log('Game reset: ', board);
+  };
 
 function getRandomNumber() {
     randomNumber = Math.random();
@@ -28,6 +36,7 @@ function getRandomNumber() {
 io.on('connection', (socket) => {
 
     socket.on('create-room', () => {
+        resetGame();
         const roomNumCreated = getRandomNumber()
         rooms[roomNumCreated] = {
             p1: {
@@ -80,20 +89,25 @@ io.on('connection', (socket) => {
         const p2SocketId = rooms[randomNumber]?.p2?.id;
 
         if (p1SocketId && p2SocketId) {
-            io.to(p1SocketId).emit('choose', { choiceP1, choiceP2 });
-            io.to(p2SocketId).emit('choose', { choiceP1, choiceP2 });
-
+            io.to(p1SocketId).emit('choose', { choiceP1 });
+            io.to(p2SocketId).emit('choose', { choiceP2 });
         }
     });
-    socket.on('click', ({index, player}) => {
-        console.log(player);
-        currentPlayer = player === 'x' ? 'o' : 'x';
+    socket.on('click', ({ index, player }) => {
+        board[index] = player;
+        
+        const isWin = checkWin(board, player)
+        if(!isWin.isWin) {
+            currentPlayer = player === 'x' ? 'o' : 'x';
+        }
+        console.log(isWin);
+
         const p1SocketId = rooms[randomNumber]?.p1?.id;
         const p2SocketId = rooms[randomNumber]?.p2?.id;
 
         if (p1SocketId && p2SocketId) {
-            io.to(p1SocketId).emit('update-board', { currentPlayer });
-            io.to(p2SocketId).emit('update-board', { currentPlayer });
+            io.to(p1SocketId).emit('update-board', { currentPlayer, board, isWin });
+            io.to(p2SocketId).emit('update-board', { currentPlayer, board, isWin });
         }
 
     })

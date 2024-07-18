@@ -8,14 +8,40 @@ import { NavLink } from 'react-router-dom';
 import { socket } from "../../socket";
 
 export default function GamePage() {
-  const [player, setPlayer] = useState('x');
+  const [player, setPlayer] = useState('');
+  const [localPlayer , setLocalPlayer]  = useState('');
   const [p1, setP1] = useState('');
   const [p2, setP2] = useState('');
 
   useEffect(() => {
     socket.on('choose', (data) => {
-      setP1(data?.choiceP1);
-      setP2(data?.choiceP2);
+      if(data.choiceP1){
+        setLocalPlayer(data.choiceP1)
+        setPlayer(data.choiceP1)
+        if(data.choiceP1 === 'x'){
+          setP1('x');
+          setP2('o');
+        }
+        else{
+          setP1('o');
+          setP2('x');
+          
+        }
+        
+      }
+      if(data.choiceP2){
+        setLocalPlayer(data.choiceP2)
+        setPlayer(data.choiceP2)
+        if(data.choiceP2 === 'x'){
+          setP2('x');
+          setP1('o');
+        }
+        else{
+          setP2('o');
+          setP1('x');
+        }
+      }
+
     });
     socket.emit('game');
     return () => {
@@ -37,7 +63,7 @@ export default function GamePage() {
         <Header />
       </div>
       <div className={styles.boardBox}>
-        <BoardGame player={player} setPlayer={setPlayer} />
+        <BoardGame localPlayer={localPlayer} player={player} setPlayer={setPlayer} />
       </div>
       <div className={styles.buttons}>
         <NavLink to={'/'}>
