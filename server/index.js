@@ -9,8 +9,20 @@ const express = require('express'),
 app.use(cors())
 
 const server = createServer(app)
-const io = new Server(server, { cors: { origin: '*', methods: '*' } });
-
+// const io = new Server(server, { cors: { origin: '*', methods: '*' } });
+app.use(cors({
+    origin: '*', // אפשר גם להגדיר דומיין ספציפי
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+  }));
+  
+  // הוספת הגדרות CORS ל-Socket.io
+  const io = new Server(server, {
+    cors: {
+      origin: '*', // אפשר גם להגדיר דומיין ספציפי
+      methods: ['GET', 'POST']
+    }
+  });
 const rooms = {
 
 }
